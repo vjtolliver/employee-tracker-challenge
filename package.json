@@ -20,6 +20,8 @@
   "homepage": "https://github.com/vjtolliver/employee-tracker-challenge#readme",
   "dependencies": {
     "inquirer": "^8.2.4",
-    "mysql": "^2.18.1"
-  }
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.4"
+  },
+  "devDependencies": {}
 }

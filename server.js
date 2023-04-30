@@ -1,43 +1,29 @@
 const inquirer = require('inquirer');
-const mysql = require('mysql12');
+const mysql = require('mysql2');
 const fs = require('fs');
 
+ const db = mysql.createConnection(
+     {
+       host: 'localhost',
+       user: 'root',
+       password: 'Passwordpassword',
+       database: 'company_db'
+     },
+     console.log(`Connected to the company_db database.`)
+   );
 
-// View all Departments
-    //DB Query to show departments table (SELECT * FROM departments)
 
-// View all Roles
-    // DB Query to show roles table (SELECT * FROM roles, departments_names + ?)
+const mainQuestion = [
+    {
+        type: 'list',
+        name: 'queryto',
+        choices: ["View All Departments", "View All Roles", "View All Employees", "Add A Department", "Add A Role", "Add An Employee", "Update An Employee"],
+        message: 'What would you like to do?',
 
-// View all Employees
-    //DB Query to show employee (Select * FROM employee, roles_id + ?)
+    }
+]
 
-// Add a Departmemt
-    // Create seperate prompts (const addDep)
-        // Enter name of Department 
-            // fs write file to seeds.sql to insert new department to departments table
-            // DB Query to show all departments
-
-// Add a Role
-    //Create seperate prompts (const addRoles)
-        //Enter Role Name
-        // Enter Salary
-        // Enter Department the role belongs to (array/list dynamically generated?)
-            // fs write file to seeds.ql to insert new role to roles table
-            // DB Query to show all roles
-
-// Add an Employee
-    // Create seperate prompts (const addEmp)
-        //Enter first name
-        // Enter last name
-        // Enter role (array/list dynamically generated?)
-        // Enter employee's Manager
-            //fs write file to seeds.sql to insert new employee into employee table
-            //DB Query to show all employees
-
-// Update Employee Role
-    // Create seperate prompts (const updEmp)
-        // Select Employee (array/list dynamicall generated)
-        // Enter employee's new role
-            // fs write file to seeds.sql to update? employee role in employee table
-            // DB Query to show all employees
+inquirer.prompt (mainQuestion)
+.then((response) => {
+    function 
+})

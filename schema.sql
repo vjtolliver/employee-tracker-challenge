@@ -1,16 +1,29 @@
+CREATE DATABASE company_db;
+
+USE company_db;
+
 -- Departments Table
-    -- Department ID : INT PRIMARY KEY
-    -- Departments Name : VARCHAR(30)
+
+CREATE TABLE departments(
+  id INT PRIMARY KEY NOT NULL,
+  department_name VARCHAR(30) NOT NULL,
+);
 
 -- Roles Table
-    -- Role ID : INT PRIMARY KEY
-    -- Job Title : VARCHAR(30)
-    -- Salary : DECIMAL
-    -- Department ID : INT FORIEGN KEY
+
+CREATE TABLE roles(
+  id INT PRIMARY KEY NOT NULL,
+  job_title VARCHAR(30) NOT NULL,
+  salary DECIMAL,
+  department_id INT FOREIGN KEY NOT NULL,
+);
 
 -- Employees Table
-    -- Employee ID : INT PRIMARY KEY
-    -- first name : VARCHAR(30)
-    -- last name : VARCHAR(30)
-    -- Role ID : INT FOREIGN KEY
-    -- Manager ID : INT FOREIGN KEY
+
+CREATE TABLE employees(
+  id INT NOT NULL PRIMARY KEY,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  role_id INT FOREIGN KEY NOT NULL,
+  manager_id INT FOREIGN KEY
+);
