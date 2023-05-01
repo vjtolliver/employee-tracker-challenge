@@ -36,3 +36,21 @@
         // Enter employee's new role
             // fs write file to seeds.sql to update? employee role in employee table
             // DB Query to show all employees -->
+
+.then((response) => {
+    function nextQuestions(response) {
+        if (response.queryto === "View All Departments"){
+            db.query(`SELECT * FROM departments`, (err, result) => {
+                if (err) {
+                    console.log(err);
+                };
+            });
+        } else if (response.queryto === "View All Roles"){
+            db.query('SELECT * FROM roles', (err, results) => {
+                if (err) {
+                    console.log(err);
+                };
+            });
+        };
+    };
+    });
