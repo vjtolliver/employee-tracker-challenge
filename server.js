@@ -75,18 +75,25 @@ inquirer.prompt (mainQuestion)
         } else if (response.taco === "Add A Department") {
             const addDpmnt = [
                 {
-                    
-                }
-            ]
-                db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
+                    type: 'input',
+                    name: 'departmentadd',
+                    message: 'What is the name of the Department?',
+                },
+            ];
+            
+                inquirer.prompt(addDpmnt)
+                .then((response) => {
+                    console.log(`${response.departmentadd}`)
+                db.query(`INSERT INTO departments (department_name) VALUES ("${response.departmentadd}");`, (err, results) => {
                    // console.log("Selection Recieved");
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log("Selection Recieved"); 
-                        console.table(results);
+                        console.log(`New Department, "${response.departmentadd}", Recieved.`); 
+                        //console.table(results);
                     }
                 });
+            });
         } else if (response.taco === "Add A Role") {
                 db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
                    // console.log("Selection Recieved");
