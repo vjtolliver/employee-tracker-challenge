@@ -43,13 +43,18 @@ inquirer.prompt (mainQuestion)
                  );
 
         if (response.taco === "View All Departments"){
-            db.query(`SELECT * FROM departments;`, (err, results) => {
+            db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
+               // console.log("Selection Recieved");
                 if (err) {
                     console.log(err);
-                };
+                } else {
+                    console.log("Selection Recieved"); 
+                    console.table(results);
+                }
             });
         } else if (response.taco === "View All Roles"){
             db.query('SELECT * FROM roles', (err, results) => {
+                console.log(results)
                 if (err) {
                     console.log(err);
                 };
