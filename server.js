@@ -177,8 +177,8 @@ inquirer.prompt (mainQuestion)
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log("Selection Recieved"); 
-                        console.table(results);
+                        console.log("Response Recieved"); 
+                        //console.table(results);
                     }
                 });
             });
@@ -192,7 +192,7 @@ inquirer.prompt (mainQuestion)
                         console.table(results);
                     }
                 });
-        } else if (response.taco === "Delete An Employee") {
+        } else if (response.taco === "Delete A Department") {
                 db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
                    // console.log("Selection Recieved");
                     if (err) {
