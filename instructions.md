@@ -55,8 +55,12 @@
     };
     });
 
-    SELECT roles.id AS ID, roles.job_title AS Title, roles.salary AS Salary FROM roles INNER JOIN departments ON roles.department_id = departments.department_name
-
-    SELECT roles.id AS ID, roles.job_title AS Title, roles.salary AS Salary FROM roles INNER JOIN departments ON roles.department_id = departments.id AND departments.department_name;
-
+Good And Final:
     SELECT departments.department_name AS Department, roles.job_title AS Title, roles.salary AS Salary, roles.id AS ID FROM departments JOIN roles ON roles.department_id = departments.id;
+
+
+    SELECT employees.id AS ID, employees.first_name AS First, employees.last_name AS Last, roles.job_title AS Title, departments.department_name, roles.salary AS Salary, employees.manager_id AS ManagerID FROM employees JOIN departments ON employees.department_id = departments.id JOIN roles ON employees.role_id = roles.id ORDER BY employees.id; 
+    
+    SELECT employees.id, employees.manager_id FROM employees.id, employees.manager_id WHERE employees.id <> employees.manager_id AND employees.id = employees.manager_id;
+
+    SELECT employee.manager_ AS Manager FROM employees JOIN employees ON employees.manager_id = employees.id;
