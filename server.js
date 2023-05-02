@@ -3,22 +3,14 @@ const mysql = require('mysql2');
 const fs = require('fs');
 const PORT = process.env.PORT || 3001;
 
-//  const db = mysql.createConnection(
-//        {
-//          host: 'localhost',
-//          user: 'root',
-//          password: 'Passwordpassword',
-//          database: 'company_db'
-//        },
-//        console.log(`Connected to the company_db database.`)
-//     );
+
 
 
 const mainQuestion = [
 {
     type: 'list',
     name: 'taco',
-    choices: ["View All Departments", "View All Roles", "View All Employees", "Add A Department", "Add A Role", "Add An Employee", "Update An Employee"],
+    choices: ["View All Departments", "View All Roles", "View All Employees", "Add A Department", "Add A Role", "Add An Employee", "Update An Employee", "Quit"],
     message: 'What would you like to do?',
 
 }
@@ -90,11 +82,107 @@ inquirer.prompt (mainQuestion)
                         console.log(err);
                     } else {
                         console.log(`New Department, "${response.departmentadd}", Recieved.`); 
-                        //console.table(results);
+                        // list = new DynamicList([options])
+                        //         choices: ["Human Resources", "Finance", "Marketing", "IT", "Operations Management"]
+                        // list.run().then(answer) => console.log(answer);
+                                //console.table(results);
                     }
                 });
             });
         } else if (response.taco === "Add A Role") {
+
+            const dpmntList = db.query(`SELECT roles.department_id FROM roles;`, (err, results) => {
+                if (err) {
+                    console.log(err)
+                }
+                // } else {
+                //     console.log(results);
+                // };
+            });
+
+            const addRole = [
+                {
+                    type: 'input',
+                    name: 'titleadd',
+                    message: 'What is the name of the Role?',
+                },
+                {
+                    type: 'number',
+                    name: 'salaryadd',
+                    message: 'What is the salary?',
+                },
+                // {
+                //     type: 'input',
+                //     name: 'dpmntadd',
+                //     // choices: ["Human Resources", "Finance", "Marketing", "IT", "Operations Management"],
+                //     message: 'Which department does it belong to?',
+                // },
+                {
+                    type: 'number',
+                    name: 'didadd',
+                    message: 'What is the departments ID?',
+                },
+            ];
+
+            inquirer.prompt(addRole)
+            .then((response) => {
+                //console.log(`${response.roleadd}`)
+
+                // if (response.dpmntadd === "Human Resources")
+                // const num = 1
+                //  if (response.didadd = dpmntList) {
+                //      console.log(response.didadd) }
+                db.query(`INSERT INTO roles (job_title, salary, department_id) VALUES ("${response.titleadd}", "${response.salaryadd}", ${response.didadd});`, (err, results) => {
+                   // console.log("Selection Recieved");
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Selection Recieved"); 
+                        //console.table(results);
+                    }
+                });
+            });
+
+        
+     } else if (response.taco === "Add An Employee") {
+
+        const addEmp = [
+            {
+                type: 'input',
+                name: 'firstname',
+                message: 'What is their first name?',
+            },
+            {
+                type: 'input',
+                name: 'lastname',
+                message: 'What is their last name?',
+            },
+            {
+                type: 'number',
+                name: 'did',
+                message: 'What is the departments ID?',
+            },
+            {
+                type: 'number',
+                name: 'rid',
+                message: 'What is the roles ID?',
+            },
+        ];
+
+        inquirer.prompt(addEmp)
+        .then((response) => {
+
+                db.query(`INSERT INTO employees (first_name, last_name, department_id, role_id) VALUES ("${response.firstname}", "${response.lastname}", ${response.did}, ${response.rid});`, (err, results) => {
+                   
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Selection Recieved"); 
+                        console.table(results);
+                    }
+                });
+            });
+        } else if (response.taco === "Update An Employee") {
                 db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
                    // console.log("Selection Recieved");
                     if (err) {
@@ -104,17 +192,7 @@ inquirer.prompt (mainQuestion)
                         console.table(results);
                     }
                 });
-        } else if (response.taco === "Add An Employee") {
-                db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
-                   
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Selection Recieved"); 
-                        console.table(results);
-                    }
-                });
-        } else if (response.taco === "Update An Employee") {
+        } else if (response.taco === "Delete An Employee") {
                 db.query('SELECT departments.id AS ID, department_name AS Departments FROM departments;', (err, results) => {
                    // console.log("Selection Recieved");
                     if (err) {
@@ -139,4 +217,4 @@ inquirer.prompt (mainQuestion)
         }
     }
 nextQuestions();
-});
+})
