@@ -54,3 +54,9 @@
         };
     };
     });
+
+    SELECT roles.id AS ID, roles.job_title AS Title, roles.salary AS Salary FROM roles INNER JOIN departments ON roles.department_id = departments.department_name
+
+    SELECT roles.id AS ID, roles.job_title AS Title, roles.salary AS Salary FROM roles INNER JOIN departments ON roles.department_id = departments.id AND departments.department_name;
+
+    SELECT departments.department_name AS Department, roles.job_title AS Title, roles.salary AS Salary, roles.id AS ID FROM departments JOIN roles ON roles.department_id = departments.id;

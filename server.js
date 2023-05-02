@@ -53,10 +53,13 @@ inquirer.prompt (mainQuestion)
                 }
             });
         } else if (response.taco === "View All Roles"){
-            db.query('SELECT * FROM roles', (err, results) => {
-                console.log(results)
+            db.query('SELECT departments.department_name AS Department, roles.job_title AS Title, roles.salary AS Salary, roles.id AS ID FROM departments JOIN roles ON roles.department_id = departments.id;', (err, results) => {
+                //console.log(results)
                 if (err) {
                     console.log(err);
+                } else {
+                    console.log("Selection Recieved"); 
+                    console.table(results);
                 };
             });
         } else {
